@@ -22,20 +22,20 @@ public class OrderReceipt {
         output.append(order.getCustomerName());
         output.append(order.getCustomerAddress());
 
-        double totSalesTx = 0d;
-        double tot = 0d;
+        double totalSalesTax = 0d;
+        double totalCost = 0d;
         for (LineItem lineItem : order.getLineItems()) {
             output.append(lineItem.toString());
 
             double salesTax = lineItem.totalAmount() * .10;
-            totSalesTx += salesTax;
+            totalSalesTax += salesTax;
 
-            tot += lineItem.totalAmount() + salesTax;
+            totalCost += lineItem.totalAmount() + salesTax;
         }
 
-        output.append("Sales Tax").append('\t').append(totSalesTx);
+        output.append("Sales Tax").append('\t').append(totalSalesTax);
 
-        output.append("Total Amount").append('\t').append(tot);
+        output.append("Total Amount").append('\t').append(totalCost);
         return output.toString();
     }
 }
