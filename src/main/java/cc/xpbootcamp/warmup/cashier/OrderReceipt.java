@@ -18,23 +18,7 @@ public class OrderReceipt {
         StringBuilder output = new StringBuilder();
 
         output.append("======Printing Orders======\n");
-
-        output.append(order.getCustomerName());
-        output.append(order.getCustomerAddress());
-
-        double totalSalesTax = 0d;
-        double totalCost = 0d;
-        for (LineItem lineItem : order.getLineItems()) {
-            output.append(lineItem.toString());
-
-            totalSalesTax += lineItem.salesTax();
-            totalCost += lineItem.totalAmount();
-        }
-        totalCost += totalSalesTax;
-
-        output.append("Sales Tax").append('\t').append(totalSalesTax);
-
-        output.append("Total Amount").append('\t').append(totalCost);
+        output.append(order.toString());
         return output.toString();
     }
 }

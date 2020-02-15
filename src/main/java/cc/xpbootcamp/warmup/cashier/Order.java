@@ -13,15 +13,21 @@ public class Order {
         this.lineItemList = lineItemList;
     }
 
-    public String getCustomerName() {
-        return cName;
-    }
+    public String toString() {
+        double totalCost = 0d;
+        double SALES_TAX = .10;
+        StringBuilder output = new StringBuilder();
+        output.append(cName);
+        output.append(addr);
 
-    public String getCustomerAddress() {
-        return addr;
-    }
+        for (LineItem lineItem : lineItemList) {
+            output.append(lineItem.toString());
+            totalCost += lineItem.totalAmount();
+        }
 
-    public List<LineItem> getLineItems() {
-        return lineItemList;
+        output.append("Sales Tax").append('\t').append(totalCost * SALES_TAX);
+        output.append("Total Amount").append('\t').append(totalCost * (1 + SALES_TAX));
+
+        return output.toString();
     }
 }
