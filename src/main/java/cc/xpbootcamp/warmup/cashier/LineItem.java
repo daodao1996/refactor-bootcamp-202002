@@ -28,6 +28,10 @@ public class LineItem {
         return price * qty;
     }
 
+    double salesTax() {
+		return totalAmount() * .10;
+	}
+
 	@Override
 	public String toString() {
 		return  desc + '\t' +
