@@ -41,4 +41,11 @@ class FibonacciTest {
         int position = -1;
         assertThrows(RuntimeException.class, () -> fibonacci.fibo(position));
     }
+
+    @Test
+    void should_return_12586269025_when_calculate_given_position_50() {
+        int position = 50;
+        long result = fibonacci.fibo(position);
+        assertEquals(12586269025L, result);
+    }
 }

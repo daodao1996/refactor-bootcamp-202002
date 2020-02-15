@@ -8,6 +8,13 @@ public class Fibonacci {
         if(position <= 1)
             return position;
         else
-            return fibo(position - 1) + fibo(position - 2);
+            return calculateFibonacci(position, 1, 0, 2);
+    }
+
+    private long calculateFibonacci(int position, long preNum, long prePreNum, int current){
+        if(current == position)
+            return preNum + prePreNum;
+        else
+            return calculateFibonacci(position, preNum + prePreNum, preNum, current + 1);
     }
 }
