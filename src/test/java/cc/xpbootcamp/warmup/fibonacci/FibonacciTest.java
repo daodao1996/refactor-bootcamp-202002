@@ -13,4 +13,11 @@ class FibonacciTest {
         long result = fibonacci.fibo(position);
         assertEquals(1, result);
     }
+
+    @Test
+    void should_return_1_when_calculate_given_position_is_2() {
+        int position = 2;
+        long result = fibonacci.fibo(position);
+        assertEquals(1, result);
+    }
 }
