@@ -27,4 +27,12 @@ class FibonacciTest {
         long result = fibonacci.fibo(position);
         assertEquals(2, result);
     }
+
+    @Test
+    void should_return_34_when_calculate_given_position_9() {
+        int position = 9;
+        long result = fibonacci.fibo(position);
+        assertEquals(34, result);
+    }
+
 }
