@@ -13,20 +13,18 @@ public class Order {
         this.lineItemList = lineItemList;
     }
 
+    public Double calculateTotalCost(){
+        return lineItemList.stream().mapToDouble(LineItem::totalAmount).sum();
+    }
+
     public String toString() {
-        double totalCost = 0d;
-        double SALES_TAX = .10;
         StringBuilder output = new StringBuilder();
         output.append(cName);
         output.append(addr);
 
         for (LineItem lineItem : lineItemList) {
             output.append(lineItem.toString());
-            totalCost += lineItem.totalAmount();
         }
-
-        output.append("Sales Tax").append('\t').append(totalCost * SALES_TAX);
-        output.append("Total Amount").append('\t').append(totalCost * (1 + SALES_TAX));
 
         return output.toString();
     }
