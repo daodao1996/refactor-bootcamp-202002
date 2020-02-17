@@ -17,7 +17,7 @@ public class OrderReceipt {
     public String printReceipt() {
         StringBuilder output = new StringBuilder();
 
-        output.append("======Printing Orders======\n");
+        output.append(generateHeader());
         output.append(order.toString());
         output.append(generateFooter());
         return output.toString();
@@ -29,6 +29,16 @@ public class OrderReceipt {
         double SALES_TAX = .10;
         output.append("Sales Tax").append('\t').append(order.calculateTotalCost() * SALES_TAX);
         output.append("Total Amount").append('\t').append(order.calculateTotalCost() * (1 + SALES_TAX));
+
+        return output.toString();
+    }
+
+    private String generateHeader(){
+        StringBuilder output = new StringBuilder();
+
+        output.append("======Printing Orders======\n");
+        output.append(order.getcName());
+        output.append(order.getAddr());
 
         return output.toString();
     }
