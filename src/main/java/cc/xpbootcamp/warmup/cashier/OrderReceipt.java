@@ -28,8 +28,8 @@ public class OrderReceipt {
 
         double SALES_TAX = .10;
         output.append("-----------------------------------\n");
-        output.append("Sales Tax").append('\t').append(order.calculateTotalCost() * SALES_TAX);
-        output.append("Total Amount").append('\t').append(order.calculateTotalCost() * (1 + SALES_TAX));
+        output.append("税额:").append('\t').append(String.format("%.2f", order.calculateTotalCost() * SALES_TAX)).append("\n");
+        output.append("总价:").append('\t').append(String.format("%.2f", order.calculateTotalCost() * (1 + SALES_TAX))).append("\n");
 
         return output.toString();
     }

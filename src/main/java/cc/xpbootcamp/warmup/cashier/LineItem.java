@@ -30,9 +30,9 @@ public class LineItem {
 
 	@Override
 	public String toString() {
-		return  desc + '\t' +
-				price + '\t' +
-				qty + '\t' +
-				totalAmount() + '\n';
+		return  desc + ", " +
+				String.format("%.2f", price) + " x " +
+				qty + ", " +
+				String.format("%.2f", totalAmount()) + '\n';
 	}
 }
