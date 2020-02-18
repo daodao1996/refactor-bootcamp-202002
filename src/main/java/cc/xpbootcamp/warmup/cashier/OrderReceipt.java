@@ -1,5 +1,7 @@
 package cc.xpbootcamp.warmup.cashier;
 
+import java.util.Calendar;
+
 /**
  * OrderReceipt prints the details of order including customer name, address, description, quantity,
  * price and amount. It also calculates the sales tax @ 10% and prints as part
@@ -27,9 +29,17 @@ public class OrderReceipt {
         StringBuilder output = new StringBuilder();
 
         double SALES_TAX = .10;
+        double DISCOUNT = .02;
         output.append("-----------------------------------\n");
         output.append("税额:").append('\t').append(String.format("%.2f", order.calculateTotalCost() * SALES_TAX)).append("\n");
-        output.append("总价:").append('\t').append(String.format("%.2f", order.calculateTotalCost() * (1 + SALES_TAX))).append("\n");
+        if(order.getDate().get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY){
+            double discount = order.calculateTotalCost() * (1 + SALES_TAX) * DISCOUNT;
+            output.append("折扣:").append('\t').append(String.format("%.2f", discount)).append("\n");
+            output.append("总价:").append('\t').append(String.format("%.2f", order.calculateTotalCost() * (1 + SALES_TAX) - discount)).append("\n");
+        }
+        else{
+            output.append("总价:").append('\t').append(String.format("%.2f", order.calculateTotalCost() * (1 + SALES_TAX))).append("\n");
+        }
 
         return output.toString();
     }
