@@ -1,5 +1,7 @@
 package cc.xpbootcamp.warmup.cashier;
 
+import java.text.SimpleDateFormat;
+
 /**
  * OrderReceipt prints the details of order including customer name, address, description, quantity,
  * price and amount. It also calculates the sales tax @ 10% and prints as part
@@ -27,6 +29,7 @@ public class OrderReceipt {
         StringBuilder output = new StringBuilder();
 
         double SALES_TAX = .10;
+        output.append("-----------------------------------\n");
         output.append("Sales Tax").append('\t').append(order.calculateTotalCost() * SALES_TAX);
         output.append("Total Amount").append('\t').append(order.calculateTotalCost() * (1 + SALES_TAX));
 
@@ -36,9 +39,7 @@ public class OrderReceipt {
     private String generateHeader(){
         StringBuilder output = new StringBuilder();
 
-        output.append("======Printing Orders======\n");
-        output.append(order.getcName());
-        output.append(order.getAddr());
+        output.append("===== 老王超市，值得信赖 =====\n");
 
         return output.toString();
     }
