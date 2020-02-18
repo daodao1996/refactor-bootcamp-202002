@@ -33,7 +33,7 @@ public class OrderReceipt {
         double feeIncludeTax = order.calculateTotalCost() * (1 + SALES_TAX);
         output.append("-----------------------------------\n");
         output.append("税额:").append('\t').append(String.format("%.2f", order.calculateTotalCost() * SALES_TAX)).append("\n");
-        if(order.getDate().get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY){
+        if(isWednesday()){
             output.append("折扣:").append('\t').append(String.format("%.2f", feeIncludeTax * DISCOUNT)).append("\n");
             output.append("总价:").append('\t').append(String.format("%.2f", feeIncludeTax * (1 - DISCOUNT))).append("\n");
         }
@@ -51,5 +51,9 @@ public class OrderReceipt {
         output.append(order.getDateDetail());
 
         return output.toString();
+    }
+
+    private boolean isWednesday(){
+        return order.getDate().get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY;
     }
 }
