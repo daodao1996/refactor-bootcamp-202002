@@ -2,7 +2,12 @@ package cc.xpbootcamp.warmup.cashier;
 
 import org.junit.jupiter.api.Test;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -10,15 +15,17 @@ import static org.hamcrest.Matchers.containsString;
 
 class OrderReceiptTest {
     @Test
-    void shouldPrintCustomerInformationOnOrder() {
-        Order order = new Order(new ArrayList<LineItem>());
+    void shouldPrintCustomerInformationOnOrder() throws ParseException {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2020, 1, 17);
+        Order order = new Order(calendar, new ArrayList<LineItem>());
         OrderReceipt receipt = new OrderReceipt(order);
 
         String output = receipt.printReceipt();
 
 
         assertThat(output, containsString("===== 老王超市，值得信赖 ====="));
-        assertThat(output, containsString("2020年2月17日，星期一"));
+        assertThat(output, containsString("2020年2月17日,\t星期一"));
     }
 
     @Test
