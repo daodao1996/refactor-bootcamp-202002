@@ -30,15 +30,15 @@ public class OrderReceipt {
 
         double SALES_TAX = .10;
         double DISCOUNT = .02;
+        double feeIncludeTax = order.calculateTotalCost() * (1 + SALES_TAX);
         output.append("-----------------------------------\n");
         output.append("税额:").append('\t').append(String.format("%.2f", order.calculateTotalCost() * SALES_TAX)).append("\n");
         if(order.getDate().get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY){
-            double discount = order.calculateTotalCost() * (1 + SALES_TAX) * DISCOUNT;
-            output.append("折扣:").append('\t').append(String.format("%.2f", discount)).append("\n");
-            output.append("总价:").append('\t').append(String.format("%.2f", order.calculateTotalCost() * (1 + SALES_TAX) - discount)).append("\n");
+            output.append("折扣:").append('\t').append(String.format("%.2f", feeIncludeTax * DISCOUNT)).append("\n");
+            output.append("总价:").append('\t').append(String.format("%.2f", feeIncludeTax * (1 - DISCOUNT))).append("\n");
         }
         else{
-            output.append("总价:").append('\t').append(String.format("%.2f", order.calculateTotalCost() * (1 + SALES_TAX))).append("\n");
+            output.append("总价:").append('\t').append(String.format("%.2f", feeIncludeTax)).append("\n");
         }
 
         return output.toString();
