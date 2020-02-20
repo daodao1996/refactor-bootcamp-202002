@@ -17,12 +17,12 @@ public class OrderReceipt {
     }
 
     public String printReceipt() {
-        StringBuilder output = new StringBuilder();
+        StringBuilder receipt = new StringBuilder();
 
-        output.append(generateHeader());
-        output.append(order.toString());
-        output.append(generateFooter());
-        return output.toString();
+        receipt.append(generateHeader());
+        receipt.append(order.toString());
+        receipt.append(generateFooter());
+        return receipt.toString();
     }
 
     private String generateFooter(){
@@ -33,7 +33,7 @@ public class OrderReceipt {
         double feeIncludeTax = order.calculateTotalCost() * (1 + SALES_TAX);
         output.append("-----------------------------------\n");
         output.append("税额:").append('\t').append(String.format("%.2f", order.calculateTotalCost() * SALES_TAX)).append("\n");
-        if(isWednesday()){
+        if(isDiscount()){
             output.append("折扣:").append('\t').append(String.format("%.2f", feeIncludeTax * DISCOUNT)).append("\n");
             output.append("总价:").append('\t').append(String.format("%.2f", feeIncludeTax * (1 - DISCOUNT))).append("\n");
         }
@@ -45,15 +45,15 @@ public class OrderReceipt {
     }
 
     private String generateHeader(){
-        StringBuilder output = new StringBuilder();
+        StringBuilder footer = new StringBuilder();
 
-        output.append("===== 老王超市，值得信赖 =====\n");
-        output.append(order.getDateDetail());
+        footer.append("===== 老王超市，值得信赖 =====\n");
+        footer.append(order.getDateDetail());
 
-        return output.toString();
+        return footer.toString();
     }
 
-    private boolean isWednesday(){
+    private boolean isDiscount(){
         return order.getDate().get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY;
     }
 }
