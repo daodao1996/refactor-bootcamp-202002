@@ -28,17 +28,14 @@ public class OrderReceipt {
     private String generateFooter(){
         StringBuilder output = new StringBuilder();
 
-        double SALES_TAX = .10;
-        double DISCOUNT = .02;
-        double feeIncludeTax = order.calculateTotalCost() * (1 + SALES_TAX);
         output.append("-----------------------------------\n");
-        output.append("税额:").append('\t').append(String.format("%.2f", order.calculateTotalCost() * SALES_TAX)).append("\n");
+        output.append(String.format("税额:\t%.2f\n", order.getTax()));
         if(isDiscount()){
-            output.append("折扣:").append('\t').append(String.format("%.2f", feeIncludeTax * DISCOUNT)).append("\n");
-            output.append("总价:").append('\t').append(String.format("%.2f", feeIncludeTax * (1 - DISCOUNT))).append("\n");
-        }
-        else{
-            output.append("总价:").append('\t').append(String.format("%.2f", feeIncludeTax)).append("\n");
+            output.append(String.format("折扣:\t%.2f\n", order.getDiscount()));
+            output.append(String.format("总价:\t%.2f\n", order.calculateTotalCost() + order.getTax() - order.getDiscount()));
+        }else{
+            output.append(String.format("总价:\t%.2f\n", order.calculateTotalCost() + order.getTax()));
+
         }
 
         return output.toString();

@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Order {
     private Calendar orderTime;
+    private static final double SALES_TAX = .10;
+    private static final double DISCOUNT = .02;
     private List<LineItem> lineItemList;
 
     public Order(Calendar orderTime, List<LineItem> lineItemList) {
@@ -40,5 +42,13 @@ public class Order {
         }
 
         return output.toString();
+    }
+
+    public double getTax(){
+        return calculateTotalCost() * SALES_TAX;
+    }
+
+    public double getDiscount(){
+        return (calculateTotalCost() + getTax()) * DISCOUNT;
     }
 }
