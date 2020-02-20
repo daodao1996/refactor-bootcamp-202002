@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.containsString;
 
 class OrderReceiptTest {
     @Test
-    void shouldPrintCustomerInformationOnOrder() throws ParseException {
+    void shouldPrintReceiptHeader() throws ParseException {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2020, 1, 17);
         Order order = new Order(calendar, new ArrayList<LineItem>());
@@ -26,7 +26,7 @@ class OrderReceiptTest {
     }
 
     @Test
-    public void shouldPrintLineItemAndSalesTaxInformation() {
+    public void shouldPrintLineItemAndSalesTaxWithoutDiscount() {
         List<LineItem> lineItems = new ArrayList<LineItem>() {{
             add(new LineItem("巧克力", 21.50, 2));
             add(new LineItem("小白菜", 10.00, 1));
@@ -44,7 +44,7 @@ class OrderReceiptTest {
 
 
     @Test
-    void shouldPrintLineItemAndSalesTaxAndDiscountInformation() {
+    void shouldPrintLineItemAndSalesTaxWithDiscount() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2020, 1, 19);
         List<LineItem> lineItems = new ArrayList<LineItem>() {{
