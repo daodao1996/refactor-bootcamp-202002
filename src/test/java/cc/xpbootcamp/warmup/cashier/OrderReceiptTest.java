@@ -11,57 +11,57 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 
 class OrderReceiptTest {
-    @Test
-    void shouldPrintReceiptHeader() throws ParseException {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2020, 1, 17);
-        Order order = new Order(calendar, new ArrayList<LineItem>());
-        OrderReceipt receipt = new OrderReceipt(order);
+  @Test
+  void shouldPrintReceiptHeader() throws ParseException {
+    Calendar calendar = Calendar.getInstance();
+    calendar.set(2020, 1, 17);
+    Order order = new Order(calendar, new ArrayList<LineItem>());
+    OrderReceipt receipt = new OrderReceipt(order);
 
-        String output = receipt.printReceipt();
-
-
-        assertThat(output, containsString("===== 老王超市，值得信赖 ====="));
-        assertThat(output, containsString("2020年2月17日, 星期一"));
-    }
-
-    @Test
-    public void shouldPrintLineItemAndSalesTaxWithoutDiscount() {
-        List<LineItem> lineItems = new ArrayList<LineItem>() {{
-            add(new LineItem("巧克力", 21.50, 2));
-            add(new LineItem("小白菜", 10.00, 1));
-        }};
-        OrderReceipt receipt = new OrderReceipt(new Order(lineItems));
-
-        String output = receipt.printReceipt();
-
-        assertThat(output, containsString("巧克力, 21.50 x 2, 43.00\n"));
-        assertThat(output, containsString("小白菜, 10.00 x 1, 10.00\n"));
-        assertThat(output, containsString("-----------------------------------\n"));
-        assertThat(output, containsString("税额:\t5.30\n"));
-        assertThat(output, containsString("总价:\t58.30"));
-    }
+    String output = receipt.printReceipt();
 
 
-    @Test
-    void shouldPrintLineItemAndSalesTaxWithDiscount() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2020, 1, 19);
-        List<LineItem> lineItems = new ArrayList<LineItem>() {{
-            add(new LineItem("巧克力", 21.50, 2));
-            add(new LineItem("小白菜", 10.00, 1));
-        }};
-        OrderReceipt receipt = new OrderReceipt(new Order(calendar, lineItems));
+    assertThat(output, containsString("===== 老王超市，值得信赖 ====="));
+    assertThat(output, containsString("2020年2月17日, 星期一"));
+  }
 
-        String output = receipt.printReceipt();
+  @Test
+  public void shouldPrintLineItemAndSalesTaxWithoutDiscount() {
+    List<LineItem> lineItems = new ArrayList<LineItem>() {{
+      add(new LineItem("巧克力", 21.50, 2));
+      add(new LineItem("小白菜", 10.00, 1));
+    }};
+    OrderReceipt receipt = new OrderReceipt(new Order(lineItems));
 
-        assertThat(output, containsString("===== 老王超市，值得信赖 ====="));
-        assertThat(output, containsString("2020年2月19日, 星期三"));
-        assertThat(output, containsString("巧克力, 21.50 x 2, 43.00\n"));
-        assertThat(output, containsString("小白菜, 10.00 x 1, 10.00\n"));
-        assertThat(output, containsString("-----------------------------------\n"));
-        assertThat(output, containsString("税额:\t5.30\n"));
-        assertThat(output, containsString("折扣:\t1.17\n"));
-        assertThat(output, containsString("总价:\t57.13"));
-    }
+    String output = receipt.printReceipt();
+
+    assertThat(output, containsString("巧克力, 21.50 x 2, 43.00\n"));
+    assertThat(output, containsString("小白菜, 10.00 x 1, 10.00\n"));
+    assertThat(output, containsString("-----------------------------------\n"));
+    assertThat(output, containsString("税额:\t5.30\n"));
+    assertThat(output, containsString("总价:\t58.30"));
+  }
+
+
+  @Test
+  void shouldPrintLineItemAndSalesTaxWithDiscount() {
+    Calendar calendar = Calendar.getInstance();
+    calendar.set(2020, 1, 19);
+    List<LineItem> lineItems = new ArrayList<LineItem>() {{
+      add(new LineItem("巧克力", 21.50, 2));
+      add(new LineItem("小白菜", 10.00, 1));
+    }};
+    OrderReceipt receipt = new OrderReceipt(new Order(calendar, lineItems));
+
+    String output = receipt.printReceipt();
+
+    assertThat(output, containsString("===== 老王超市，值得信赖 ====="));
+    assertThat(output, containsString("2020年2月19日, 星期三"));
+    assertThat(output, containsString("巧克力, 21.50 x 2, 43.00\n"));
+    assertThat(output, containsString("小白菜, 10.00 x 1, 10.00\n"));
+    assertThat(output, containsString("-----------------------------------\n"));
+    assertThat(output, containsString("税额:\t5.30\n"));
+    assertThat(output, containsString("折扣:\t1.17\n"));
+    assertThat(output, containsString("总价:\t57.13"));
+  }
 }
