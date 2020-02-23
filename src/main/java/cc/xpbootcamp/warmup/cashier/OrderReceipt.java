@@ -44,7 +44,7 @@ public class OrderReceipt {
     StringBuilder footer = new StringBuilder();
 
     footer.append("===== 老王超市，值得信赖 =====\n");
-    footer.append(order.getDateDetail());
+    footer.append(new OrderDate(order.getDate()).getDateDetail());
 
     return footer.toString();
   }
